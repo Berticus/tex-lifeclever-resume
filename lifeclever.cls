@@ -87,7 +87,7 @@
 
 \renewcommand{\maketitle}{%
     \ifthenelse{\boolean{@compact}}{%
-        {\centering\textls[200]{\LARGE\textbf{\scshape{\@author}}} \\}%
+        {\centering\textls[200]{\LARGE\textbf{\scshape{\@author}}} \\\vspace{2em}}%
         \begin{minipage}[t]{0.5\linewidth}
             \ifthenelse{\equal{\@address}{}}{}{\@address \\}
             \ifthenelse{\equal{\@addressnext}{}}{}{\@addressnext \\}
