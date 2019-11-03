@@ -16,7 +16,7 @@
 
 \setlength{\hoffset}{-0.25in}
 \setlength{\oddsidemargin}{0in}
-\setlength{\topmargin}{0in}
+\setlength{\topmargin}{-0.25in}
 \setlength{\marginparwidth}{0in}
 \setlength{\marginparpush}{0in}
 \setlength{\headheight}{0in}
@@ -25,7 +25,7 @@
 \setlength{\voffset}{-0.25in}
 \setlength{\parindent}{0pt}
 \setlength{\headsep}{0pt}
-\setlength{\parskip}{0pt}
+\setlength{\parskip}{1ex}
 % No headers or footers
 \pagestyle{empty}
 % Only one space after the end of a sentence
@@ -33,7 +33,7 @@
 % Do not align the right side of text
 %\raggedright
 % Required
-\setlength{\textheight}{9.5in}
+\setlength{\textheight}{10in}
 \setlength{\textwidth}{7in}
 \pagenumbering{arabic}
 
@@ -54,8 +54,7 @@
 \linespread{0.9}
 % Setting up colors
 \RequirePackage{color}
-%\definecolor{unfocus}{gray}{0.10}
-\definecolor{unfocus}{gray}{0.20}
+\definecolor{unfocus}{gray}{0.10}
 % For hanging bullets
 \RequirePackage{enumitem}
 \RequirePackage{multicol}
@@ -88,7 +87,7 @@
 
 \renewcommand{\maketitle}{%
     \ifthenelse{\boolean{@compact}}{%
-        \centering\textls[200]{\large\textbf{\scshape{\@author}}} \\%
+        {\centering\textls[200]{\LARGE\textbf{\scshape{\@author}}} \\}%
         \begin{minipage}[t]{0.5\linewidth}
             \ifthenelse{\equal{\@address}{}}{}{\@address \\}
             \ifthenelse{\equal{\@addressnext}{}}{}{\@addressnext \\}
@@ -112,20 +111,18 @@
             \ifthenelse{\equal{\@telephone}{}}{}{\@telephone \\}
         \end{center}%
     }%
+    \vspace*{1ex}
 }
 
 \newlength{\@affiliationright}
 \setlength{\@affiliationright}{2in}
 \newlength{\@affiliationleft}
 
-\newlength{\@affiliationcount}
-
 \newenvironment{field}[1]{%
-    \setlength{\@affiliationcount}{1pt}%
 % \affiliation{title}{institute}{location}{duration}
+    \newboolean{@firstsubsection}%
+    \setboolean{@firstsubsection}{true}%
     \newcommand{\affiliation}[4]{%
-        \ifthenelse{\lengthtest{\@affiliationcount>1pt}}{\vspace{7pt}}{}%
-        \addtolength{\@affiliationcount}{1pt}%
         \setlength{\@affiliationleft}{\textwidth}%
         \addtolength{\@affiliationleft}{-\@affiliationright}%
         \begin{minipage}[t]{\@affiliationleft}
@@ -134,19 +131,17 @@
         \begin{minipage}[t]{\@affiliationright}
             \textcolor{unfocus}{##3}\\\textcolor{unfocus}{##4}
         \end{minipage}%
+        \vspace{1ex}%
     }%
-    \begin{minipage}{\textwidth}
-        \goodbreak
-        \rule{\textwidth}{1pt}
-
-        \textls[200]{\large\textbf{\scshape{#1}}}
-
-        \ \vspace{-4pt}
-        \rule[3pt]{\textwidth}{0.25pt}
-        \nopagebreak
+    \renewcommand{\subsection}[1]{%
+        \ifthenelse{\boolean{@firstsubsection}}{\vspace{-1ex}}{\vspace{2ex}}%
+        \setboolean{@firstsubsection}{false}%
+        \emph{##1}%
+    }%
+    \rule{\textwidth}{1pt}
+    \textls[200]{\large\textbf{\scshape{#1}}} \\
+    \rule[3pt]{\textwidth}{0.25pt}
 }{%
-    \vspace*{3pt}%
-    \end{minipage}%
 }
 
 \setlist{noitemsep,nolistsep}
