@@ -40,17 +40,8 @@
 % enumitem will be used to produce hanging punctuations
 \RequirePackage{ifthen}
 \RequirePackage{url}
-% Set font to KPFont (supports bold small caps) --- next 3 lines
-%   - Text figures
-%   - Serifs
-%   - Stroke variation
-%   - Similar width
-%   - Medium height:width
-%   - Medium height
-%   - No mirrors
-%   - Medium counters
-\RequirePackage[T1]{fontenc}
-\RequirePackage[fulloldstylenums]{kpfonts}
+\RequirePackage{fontspec}
+\setmainfont[Numbers=OldStyle]{Linux Libertine O}
 \linespread{0.9}
 % Setting up colors
 \RequirePackage{color}
@@ -87,7 +78,7 @@
 
 \renewcommand{\maketitle}{%
     \ifthenelse{\boolean{@compact}}{%
-        {\centering\textls[200]{\LARGE\textbf{\scshape{\@author}}} \\\vspace{2em}}%
+        {\centering\addfontfeature{LetterSpace=20.0}\LARGE\textbf{\scshape{\@author}}\addfontfeature{LetterSpace=0.0} \\\vspace{2em}}%
         \begin{minipage}[t]{0.5\linewidth}
             \ifthenelse{\equal{\@address}{}}{}{\@address \\}
             \ifthenelse{\equal{\@addressnext}{}}{}{\@addressnext \\}
@@ -102,7 +93,7 @@
         \end{minipage}\\%
     }{%
         \begin{center}
-            \textls[200]{\large\textbf{\scshape{\@author}}} \\
+            \addfontfeature{LetterSpace=2.0}\large\textbf{\scshape{\@author}}\addfontfeature{LetterSpace=0.0} \\
             \ifthenelse{\equal{\@address}{}}{}{\@address \\}
             \ifthenelse{\equal{\@addressnext}{}}{}{\@addressnext \\}
             \ifthenelse{\equal{\@citystatezip}{}}{}{\@citystatezip \\}
@@ -139,7 +130,7 @@
         \emph{##1}%
     }%
     \rule{\textwidth}{1pt}
-    \textls[200]{\large\textbf{\scshape{#1}}} \\
+    \addfontfeature{LetterSpace=20.0}\large\textbf{\scshape{#1}} \addfontfeature{LetterSpace=0.0}\\
     \rule[3pt]{\textwidth}{0.25pt}
 }{%
 }
