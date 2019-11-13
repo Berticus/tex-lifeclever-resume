@@ -40,8 +40,9 @@
 % enumitem will be used to produce hanging punctuations
 \RequirePackage{ifthen}
 \RequirePackage{url}
+%\RequirePackage[T1]{fontenc}
 \RequirePackage{fontspec}
-\setmainfont[Numbers=OldStyle]{Linux Libertine O}
+\setmainfont[Numbers=OldStyle]{Libertinus Serif}
 \linespread{0.9}
 % Setting up colors
 \RequirePackage{color}
